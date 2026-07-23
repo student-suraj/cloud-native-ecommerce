@@ -1,5 +1,15 @@
 package com.cloudcommerce.backend.dto;
 
-public class ApiResponse {
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
+@Data
+@AllArgsConstructor
+public class ApiResponse<T> {
+
+    private boolean success;
+
+    private String message;
+
+    private T data;
 }
