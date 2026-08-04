@@ -1,0 +1,2 @@
+com\ecommerce\gateway\filter\LoggingFilter.class
+com\ecommerce\gateway\ApiGatewayApplication.class
