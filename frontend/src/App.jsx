@@ -56,6 +56,8 @@ function App() {
                 path="/products/:id/details"
                 element={<ProductDetails />}
             />
+
+            
             <Route
                 path="/products/:id/inventory"
                 element={<InventoryManagement />}

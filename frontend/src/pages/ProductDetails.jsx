@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
+import Recommendations from './Recommendations'
 import {
     FiArrowLeft,
     FiBox,
     FiDatabase,
     FiMapPin,
     FiPackage,
-    FiShoppingBag,
     FiTruck,
     FiUser,
 } from 'react-icons/fi'
@@ -18,13 +18,10 @@ import { getProductDetails } from '../services/productService'
 function ProductDetails() {
 
     const { id } = useParams()
-
     const navigate = useNavigate()
 
     const [data, setData] = useState(null)
-
     const [loading, setLoading] = useState(true)
-
 
     useEffect(() => {
 
@@ -34,8 +31,7 @@ function ProductDetails() {
 
                 setLoading(true)
 
-                const response =
-                    await getProductDetails(id)
+                const response = await getProductDetails(id)
 
                 setData(response)
 
@@ -56,7 +52,6 @@ function ProductDetails() {
                 setLoading(false)
 
             }
-
         }
 
         loadDetails()
@@ -83,7 +78,6 @@ function ProductDetails() {
             </div>
 
         )
-
     }
 
 
@@ -111,19 +105,16 @@ function ProductDetails() {
             </div>
 
         )
-
     }
 
 
     const product = data.product
-
     const inventory = data.inventory
 
 
     return (
 
         <div className="mx-auto max-w-6xl space-y-6">
-
 
             {/* Header */}
 
@@ -135,7 +126,6 @@ function ProductDetails() {
                 >
                     <FiArrowLeft size={18} />
                 </button>
-
 
                 <div>
 
@@ -200,11 +190,11 @@ function ProductDetails() {
 
                             <div>
 
-                <span className="rounded-full bg-cyan-500/10 px-3 py-1 text-xs font-semibold text-cyan-400">
+                                <span className="rounded-full bg-cyan-500/10 px-3 py-1 text-xs font-semibold text-cyan-400">
 
-                  {product.category}
+                                    {product.category}
 
-                </span>
+                                </span>
 
                                 <h2 className="mt-4 text-3xl font-bold text-white">
 
@@ -229,9 +219,9 @@ function ProductDetails() {
                                 }`}
                             >
 
-                {product.status}
+                                {product.status}
 
-              </span>
+                            </span>
 
                         </div>
 
@@ -257,24 +247,20 @@ function ProductDetails() {
 
                         <div className="mt-8 grid gap-4 sm:grid-cols-2">
 
-
                             <InfoItem
                                 label="SKU"
                                 value={product.sku}
                             />
-
 
                             <InfoItem
                                 label="Color"
                                 value={product.color}
                             />
 
-
                             <InfoItem
                                 label="Weight"
                                 value={`${product.weight} kg`}
                             />
-
 
                             <InfoItem
                                 label="Currency"
@@ -339,17 +325,17 @@ function ProductDetails() {
                                 <FiPackage className="text-zinc-500" />
 
                                 <span className="text-sm text-zinc-400">
-                  Inventory Status
-                </span>
+                                    Inventory Status
+                                </span>
 
                             </div>
 
 
                             <span className="rounded-full bg-emerald-500/10 px-3 py-1 text-xs font-semibold text-emerald-400">
 
-                {inventory.status}
+                                {inventory.status}
 
-              </span>
+                            </span>
 
                         </div>
 
@@ -358,18 +344,15 @@ function ProductDetails() {
 
                         <div className="mt-5 grid gap-4 sm:grid-cols-3">
 
-
                             <InventoryCard
                                 label="Available"
                                 value={inventory.quantityAvailable}
                             />
 
-
                             <InventoryCard
                                 label="Reserved"
                                 value={inventory.reservedQuantity}
                             />
-
 
                             <InventoryCard
                                 label="Reorder Level"
@@ -389,19 +372,16 @@ function ProductDetails() {
                                 value={inventory.warehouseCode}
                             />
 
-
                             <InfoItem
                                 label="Warehouse Zone"
                                 value={inventory.warehouseZone}
                             />
-
 
                             <InfoItem
                                 icon={<FiTruck />}
                                 label="Supplier"
                                 value={inventory.supplierName}
                             />
-
 
                             <InfoItem
                                 icon={<FiUser />}
@@ -420,7 +400,6 @@ function ProductDetails() {
                                 label="Maximum Stock"
                                 value={inventory.maximumStockLevel}
                             />
-
 
                             <InfoItem
                                 label="Unit Price"
@@ -451,9 +430,20 @@ function ProductDetails() {
                     </div>
 
 
+                    {/* Recommendations */}
+
+                    <div className="rounded-2xl border border-zinc-800 bg-zinc-950 p-6">
+
+                        <Recommendations
+                            productId={product.id}
+                        />
+
+                    </div>
+
+
                     {/* Actions */}
 
-                    <div className="flex gap-3">
+                    <div className="flex flex-wrap gap-3">
 
                         <button
                             onClick={() =>
@@ -464,6 +454,7 @@ function ProductDetails() {
                             Edit Product
                         </button>
 
+
                         <button
                             onClick={() =>
                                 navigate(`/products/${id}/inventory`)
@@ -472,6 +463,8 @@ function ProductDetails() {
                         >
                             Manage Inventory
                         </button>
+
+
                         <button
                             onClick={() => navigate('/products')}
                             className="rounded-xl border border-zinc-800 px-5 py-3 text-sm font-semibold text-zinc-400 transition hover:text-white"
@@ -505,8 +498,8 @@ function InfoItem({
 
                 {icon && (
                     <span className="text-zinc-500">
-            {icon}
-          </span>
+                        {icon}
+                    </span>
                 )}
 
                 <p className="text-xs text-zinc-600">
